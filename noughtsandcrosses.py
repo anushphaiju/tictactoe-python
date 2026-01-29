@@ -128,7 +128,18 @@ def menu():
     # 2 - Save score in file 'leaderboard.txt'
     # 3 - Load and display the scores from the 'leaderboard.txt'
     # q - End the program
-    return choice
+     while True: 
+        print()
+        print("1 - Play the game")
+        print("2 - Save score in file 'leaderboard.txt")
+        print("3 - Load and display the scores from the 'leaderboard.txt")
+        print("q - End the program")
+        choice = input("Enter you choice : ")
+    
+        if choice in ["1", "2", "3", "q"]:
+            return choice
+        else:
+            print("Invalid choice ya fat fucker!!!!!!!")
 
 def load_scores():
     # develop code to load the leaderboard scores
@@ -136,6 +147,15 @@ def load_scores():
     # return the scores in a Python dictionary
     # with the player names as key and the scores as values
     # return the dictionary in leaders
+    if os.path.exists("file.txt"):
+        try:
+            with open("file.txt", "r") as da_file:
+                leaders = json.load(da_file)
+        except: 
+            '''
+            kun error catch garne tyo hal, main kura gardeko chu
+            '''
+            leaders = {}
     return leaders
     
 def save_score(score):
@@ -148,4 +168,5 @@ def display_leaderboard(leaders):
     # develop code to display the leaderboard scores
     # passed in the Python dictionary parameter leader
     pass
+
 
