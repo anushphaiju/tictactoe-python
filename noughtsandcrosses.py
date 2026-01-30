@@ -128,45 +128,46 @@ def menu():
     # 2 - Save score in file 'leaderboard.txt'
     # 3 - Load and display the scores from the 'leaderboard.txt'
     # q - End the program
-     while True: 
-        print()
-        print("1 - Play the game")
-        print("2 - Save score in file 'leaderboard.txt")
-        print("3 - Load and display the scores from the 'leaderboard.txt")
-        print("q - End the program")
-        choice = input("Enter you choice : ")
-    
-        if choice in ["1", "2", "3", "q"]:
-            return choice
-        else:
-            print("Invalid choice ya fat fucker!!!!!!!")
-
+    print("1 - Play the game")
+    print("2- Save score in file 'leaderboard.txt'")
+    print("3-Load and display the scores from the 'leaderboard.txt'")
+    print("q-End the program")
+    choice=input("Enter your choice:").lower()
+    if choice in ["1","2","3","q"]:
+        return choice
+    else:
+        print("Invalid choice")
 def load_scores():
+    leaders={}
+    if os.path.exists("leaderboard.txt"):
+        try:
+            with open("leaderboard.txt","r") as file:
+                leaders=json.load(file)
+        except(IOError,json.JSONDecodeError):
+            leaders={}
     # develop code to load the leaderboard scores
     # from the file 'leaderboard.txt'
     # return the scores in a Python dictionary
     # with the player names as key and the scores as values
     # return the dictionary in leaders
-    if os.path.exists("file.txt"):
-        try:
-            with open("file.txt", "r") as da_file:
-                leaders = json.load(da_file)
-        except: 
-            '''
-            kun error catch garne tyo hal, main kura gardeko chu
-            '''
-            leaders = {}
     return leaders
-    
 def save_score(score):
     # develop code to ask the player for their name
     # and then save the current score to the file 'leaderboard.txt'
-    return
-
+    score=0
+    name=input("Enter your name to save score:")
+    leaders=load_scores()
+    if name in leaders:
+        leaders[name]+=score
+    else:
+        leaders[name]=score
+    with open("leaderboard.txt","w") as file:
+        json.dump(leaders,file)
+    print(f"Score of{name}")
 
 def display_leaderboard(leaders):
     # develop code to display the leaderboard scores
     # passed in the Python dictionary parameter leader
-    pass
-
-
+    print("LEADERBOARD")
+    for name,score in leaders.items():
+        print(f"{name}:{score}")
