@@ -2,15 +2,16 @@ from noughtsandcrosses import *
 
     
 def main():
-    board = [ ['1','2','3'],\
-              ['4','5','6'],\
-              ['7','8','9']]
+    board = {0:'0', 1:'1', 2:'2', 3:'3', 4:'4',
+           5:'5', 6:'6', 7:'7', 8:'8'}
 
     welcome(board)
     total_score = 0
     while True:
         choice = menu()
         if choice == '1':
+            board = {0:'0', 1:'1', 2:'2', 3:'3', 4:'4',
+           5:'5', 6:'6', 7:'7', 8:'8'}
             score = play_game(board)
             total_score += score
             print('Your current score is:',total_score)
